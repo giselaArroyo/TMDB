@@ -11,7 +11,7 @@ app.use("/api", routes);
 
 const PORT = 3001;
 
-db.sync({ force: false }).then(() => {
+db.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
   });

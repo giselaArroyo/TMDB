@@ -1,8 +1,9 @@
-const { DataTypes, Model } = require("sequelize");
+const S = require("sequelize");
 const db = require("../db");
 const bcrypt = require("bcrypt");
+const Fav = require("./Fav");
 
-class User extends Model {
+class User extends S.Model {
   hash(password, salt) {
     return bcrypt.hash(password, salt);
   }
@@ -16,21 +17,21 @@ class User extends Model {
 User.init(
   {
     name: {
-      type: DataTypes.STRING,
+      type: S.STRING,
       allowNull: false,
     },
     lastName: {
-      type: DataTypes.STRING,
+      type: S.STRING,
       allowNull: false,
     },
     email: {
-      type: DataTypes.STRING,
+      type: S.STRING,
       allowNull: false,
       unique: true,
       validate: { isEmail: true },
     },
     password: {
-      type: DataTypes.STRING,
+      type: S.STRING,
       allowNull: false,
       validate: {
         min: 4,
@@ -51,5 +52,8 @@ User.beforeCreate((user) => {
   user.salt = salt;
   return user.hash(user.password, salt).then((hash) => (user.password = hash));
 });
+
+User.hasMany(Fav);
+Fav.belongsTo(User);
 
 module.exports = User;
