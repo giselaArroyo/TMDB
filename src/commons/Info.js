@@ -27,10 +27,13 @@ function Info() {
   }, []);
 
   let titulo;
+  let titOriginal;
   if (type === "movie") {
     titulo = film.title;
+    titOriginal = film.original_title;
   } else {
     titulo = film.name;
+    titOriginal = film.original_name;
   }
 
   return (
@@ -47,7 +50,7 @@ function Info() {
         </div>
         <div className="column">
           <p>Sinopsis: {film.overview}</p>
-          <p>Título original: {film.original_title}</p>
+          <p>Título original: {titOriginal}</p>
           <p>Valoración del público: {Math.round(film.vote_average)}</p>
           <button className="button is-primary">Agregar a Favoritos</button>
         </div>
