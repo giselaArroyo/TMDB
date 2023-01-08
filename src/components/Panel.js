@@ -12,7 +12,7 @@ function Panel() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search/query${value}`);
+    navigate(`/search/${value}`);
   };
 
   return (

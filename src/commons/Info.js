@@ -35,7 +35,20 @@ function Info() {
     titulo = film.name;
     titOriginal = film.original_name;
   }
+  const title = titulo;
+  const poster_path = film.poster_path;
 
+  const handleAdd = () => {
+    axios
+      .post("/api/fav/add", {
+        id: id,
+        type: type,
+        title: title,
+        poster_path: poster_path,
+      })
+      .then((res) => res.data);
+    // .then((fin) => alert("Se agregó a favoritos"));
+  };
   return (
     <div className="container">
       <div className="box">
@@ -44,7 +57,7 @@ function Info() {
       <div className="columns">
         <div className="column is-one-quarter">
           <img
-            src={`https://image.tmdb.org/t/p/w500${film.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
             alt="poster"
           />
         </div>
@@ -52,7 +65,11 @@ function Info() {
           <p>Sinopsis: {film.overview}</p>
           <p>Título original: {titOriginal}</p>
           <p>Valoración del público: {Math.round(film.vote_average)}</p>
-          <button className="button is-primary">Agregar a Favoritos</button>
+          {
+            <button className="button is-danger is-rounded" onClick={handleAdd}>
+              Agregar a Favoritos
+            </button>
+          }
         </div>
       </div>
     </div>
