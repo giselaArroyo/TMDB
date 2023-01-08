@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function NewUser() {
+function Register() {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ function NewUser() {
     e.preventDefault();
 
     axios
-      .post("/api/newuser", {
+      .post("/api/user/register", {
         name: name,
         lastName: lastName,
         email: email,
@@ -104,4 +104,4 @@ function NewUser() {
   );
 }
 
-export default NewUser;
+export default Register;

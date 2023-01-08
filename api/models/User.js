@@ -7,6 +7,7 @@ class User extends S.Model {
   hash(password, salt) {
     return bcrypt.hash(password, salt);
   }
+
   validatePassword(password) {
     return this.hash(password, this.salt).then(
       (newHash) => newHash === this.password
