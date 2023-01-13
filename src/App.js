@@ -6,12 +6,12 @@ import Navbar from "./components/Navbar";
 import Main from "./components/Main";
 import Info from "./commons/Info";
 import Resultado from "./components/Resultado";
-import NewUser from "./components/NewUser";
 import Bienvenido from "./components/Bienvenido";
 import Login from "./components/Login";
 import Misfavs from "./components/Misfavs";
 import { useDispatch } from "react-redux";
 import { setUser } from "./store/user";
+import Register from "./components/Register";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,11 +43,11 @@ function App() {
       })
 
       .catch(() =>
-        console.error("No se pudo acceder a las películas más populares")
+        console.error("No se pudo acceder a las series más populares")
       );
 
     axios
-      .get("/api/me")
+      .get("/api/user/validate")
       .then((res) => res.data)
       .then((user) => {
         console.log("EN APP", user);
@@ -64,8 +64,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Main films={films} series={series} />} />
         <Route path="/:type/:id" element={<Info />} />
-        <Route path="/search/query:value" element={<Resultado />} />
-        <Route path="/newuser" element={<NewUser />} />
+        <Route path="/search/:value" element={<Resultado />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/bienvenido" element={<Bienvenido />} />
         <Route path="/login" element={<Login />} />
         <Route path="/misfavs" element={<Misfavs />} />

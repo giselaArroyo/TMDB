@@ -24,7 +24,7 @@ const Login = () => {
     e.preventDefault();
 
     axios
-      .post("/api/login", {
+      .post("/api/user/login", {
         email: email,
         password: password,
       })

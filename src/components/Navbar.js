@@ -15,7 +15,7 @@ function Navbar() {
 
   const handleLogout = () => {
     axios
-      .post("/api/logout")
+      .post("/api/user/logout")
       .then((res) => {
         dispatch(setUser({}));
         console.log("logged out");
@@ -40,33 +40,42 @@ function Navbar() {
         </a>
       </div>
       <div className="navbar-item navbar-end">
-        {user.id ? (
-          <div>
-            <p className="has-text-white">{user.name}</p>
-
-            <a
-              href="http://localhost:3000/misfavs"
-              className="button is-rounded"
-            >
-              <strong>Favoritos</strong>
-            </a>
-            <button className="button is-rounded" onClick={handleLogout}>
-              <strong>Salir</strong>
-            </button>
-          </div>
-        ) : (
-          <div>
-            <a href="http://localhost:3000/login" className="button is-rounded">
-              <strong>Ingresar</strong>
-            </a>
-            <a
-              href="http://localhost:3000/newuser"
-              className="button is-rounded"
-            >
-              <strong>Registrarse</strong>
-            </a>
-          </div>
-        )}
+        <div className="margen">
+          {user.id ? (
+            <div className="buttons are-small">
+              <div className="boton">
+                <p className="has-text-white"> Hola {user.name} </p>
+              </div>
+              <a
+                href="http://localhost:3000/misfavs"
+                className="button button is-info is-inverted is-rounded is-responsive"
+              >
+                <p>Mis favoritos</p>
+              </a>
+              <button
+                className="button button is-info is-inverted is-rounded is-responsive"
+                onClick={handleLogout}
+              >
+                <p>Salir</p>
+              </button>
+            </div>
+          ) : (
+            <div className="buttons">
+              <a
+                href="http://localhost:3000/login"
+                className="button button is-info is-inverted is-rounded is-responsive"
+              >
+                <p>Ingresar</p>
+              </a>
+              <a
+                href="http://localhost:3000/register"
+                className="button button is-info is-inverted is-rounded is-responsive"
+              >
+                <p>Registrarse</p>
+              </a>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );

@@ -13,6 +13,13 @@ Fav.init(
       type: S.STRING,
       allowNull: false,
     },
+    poster_path: {
+      type: S.STRING,
+    },
+    title: {
+      type: S.STRING,
+      allowNull: false,
+    },
   },
   {
     sequelize: db,

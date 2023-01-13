@@ -26,13 +26,23 @@ const Resultado = () => {
         </h2>
         <div className="columns is-multiline layout">
           {resultado[0]
-            ? resultado.map((data, i) => (
-                <div className="column is-2" key={i}>
-                  <Link to={`/${data.media_type}/${data.id}`}>
-                    <Card data={data} />
-                  </Link>
-                </div>
-              ))
+            ? resultado.map((data, i) =>
+                data.known_for ? (
+                  data.known_for.map((data, i) => (
+                    <div className="column is-2" key={i}>
+                      <Link to={`/${data.media_type}/${data.id}`}>
+                        <Card data={data} />
+                      </Link>
+                    </div>
+                  ))
+                ) : (
+                  <div className="column is-2" key={i}>
+                    <Link to={`/${data.media_type}/${data.id}`}>
+                      <Card data={data} />
+                    </Link>
+                  </div>
+                )
+              )
             : console.log("Buscado")}
         </div>
       </div>
