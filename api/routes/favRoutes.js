@@ -13,4 +13,7 @@ router.delete("/remove", validateAuth, favController.remove);
 // GET ALL FAVS    ---> api/fav/misfavs
 router.get("/misfavs", validateAuth, favController.misFavs);
 
+// GET ONE FAV    ---> api/fav/:idFilm
+router.get("/:idFilm", validateAuth, favController.oneFav);
+
 module.exports = router;

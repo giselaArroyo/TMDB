@@ -46,6 +46,17 @@ class favController {
     }
     res.send(data);
   }
+
+  // GET ONE FAV
+
+  static async oneFav(req, res) {
+    const { id } = req.user;
+    const idFilm = req.body.id;
+    const { error, data } = await favService.oneFav(id, idFilm);
+    if (error) {
+      return res.status(data.status || 500).send({ message: data.message });
+    }
+  }
 }
 
 module.exports = favController;
