@@ -26,7 +26,7 @@ class favController {
 
   // REMOVE TO FAV
   static async remove(req, res) {
-    const idFilm = req.body.id;
+    const { idFilm } = req.params;
     const { id } = req.user;
 
     const { error, data } = await favService.remove(idFilm, id);
@@ -50,12 +50,13 @@ class favController {
   // GET ONE FAV
 
   static async oneFav(req, res) {
-    const { id } = req.user;
-    const idFilm = req.body.id;
-    const { error, data } = await favService.oneFav(id, idFilm);
+    const userId = req.user.id;
+    const idFilm = req.body.idFilm;
+    const { error, data } = await favService.oneFav(userId, idFilm);
     if (error) {
       return res.status(data.status || 500).send({ message: data.message });
     }
+    res.send(data);
   }
 }
 

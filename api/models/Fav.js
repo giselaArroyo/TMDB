@@ -6,7 +6,7 @@ class Fav extends S.Model {}
 Fav.init(
   {
     idFilm: {
-      type: S.INTEGER,
+      type: S.STRING,
       allowNull: false,
     },
     type: {
