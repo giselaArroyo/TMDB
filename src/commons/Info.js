@@ -8,7 +8,6 @@ function Info() {
   const params = useParams();
   const idFilm = params.id;
   const type = params.type;
-  let existe = false;
   const [inFav, setInFav] = useState(false);
 
   useEffect(() => {
@@ -42,6 +41,24 @@ function Info() {
     getFavs();
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(
+        "https://api.themoviedb.org/3/" +
+          type +
+          "/" +
+          idFilm +
+          "?api_key=e8ff6e05340d323b4edab8db8b289155&language=es"
+      )
+      .then((res) => res.data)
+      .then((data) => {
+        setFilm(data);
+      })
+      .catch(() =>
+        console.error("No se pudo acceder a las películas más populares")
+      );
+  }, []);
+
   let titulo;
   let titOriginal;
   if (type === "movie") {
@@ -54,17 +71,6 @@ function Info() {
   const title = titulo;
   const poster_path = film.poster_path;
 
-  const handleAdd = () => {
-    axios
-      .post("/api/fav/add", {
-        id: idFilm,
-        type: type,
-        title: title,
-        poster_path: poster_path,
-      })
-      .then((res) => res.data);
-    // .then((fin) => alert("Se agregó a favoritos"));
-  };
   return (
     <div className="container">
       <div className="box">
@@ -78,18 +84,30 @@ function Info() {
           />
         </div>
         <div className="column">
-          <p>Sinopsis: {film.overview}</p>
-          <p>Título original: {titOriginal}</p>
-          <p>Valoración del público: {Math.round(film.vote_average)}</p>
+          <div className="box">
+            <br />
+            <strong>Título original: </strong>
+            {titOriginal}
+            <p></p>
+            <br />
+            <strong>Sinopsis: </strong>
+            {film.overview}
+            <p></p>
+            <br />
+            <strong>Valoración del público: </strong>
+            {Math.round(film.vote_average)}
+            <p></p>
+            <br />
 
-          <Button
-            inFav={inFav}
-            setInFav={setInFav}
-            type={type}
-            title={title}
-            poster_path={poster_path}
-            idFilm={idFilm}
-          />
+            <Button
+              inFav={inFav}
+              setInFav={setInFav}
+              type={type}
+              title={title}
+              poster_path={poster_path}
+              idFilm={idFilm}
+            />
+          </div>
         </div>
       </div>
     </div>
