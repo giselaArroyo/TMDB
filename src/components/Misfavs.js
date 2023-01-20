@@ -16,7 +16,7 @@ const Misfavs = () => {
   return (
     <div>
       <div className="container">
-        <h2 className="title is-4">Estas son tus pelis favoritas:</h2>
+        <h2 className="title is-4">Estas son tus pelis y series favoritas:</h2>
         <div className="columns is-multiline layout">
           {favoritos[0]
             ? favoritos.map((data, i) => (

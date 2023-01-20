@@ -17,23 +17,4 @@ router.get("/misfavs", validateAuth, favController.misFavs);
 // GET ONE FAV    ---> api/fav/onefav
 router.get("/onefav", validateAuth, favController.oneFav);
 
-router.get("/uno", validateAuth, (req, res) => {
-  const userId = req.user.id;
-  const idFilm = req.body.idFilm;
-
-  Fav.findOne({
-    where: { idFilm: idFilm, userId: userId },
-  }).then((fav) => {
-    if (fav) {
-      res.send({
-        data: true,
-      });
-    } else {
-      res.send({
-        data: false,
-      });
-    }
-  });
-});
-
 module.exports = router;
