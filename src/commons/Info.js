@@ -165,7 +165,7 @@ function Info() {
                     </Link>
                   </div>
                 ))
-              : console.log("Buscado")}
+              : null}
           </div>
         </div>
       </div>
