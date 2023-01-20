@@ -1,19 +1,15 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function Card({ data }) {
-  let titulo, poster, type;
+  let titulo, poster;
   poster = data.poster_path;
 
   if (data.media_type === "tv") {
-    type = data.media_type;
     titulo = data.name;
   } else if (data.media_type === "movie") {
     titulo = data.title;
-    type = data.media_type;
   } else {
     titulo = data.title;
-    type = data.type;
   }
 
   return (
