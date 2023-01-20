@@ -71,12 +71,16 @@ class favService {
   }
 
   // GET ONE FAV
-  static async oneFav(id, idFilm) {
+  static async oneFav(userId, idFilm) {
     try {
       const response = await Fav.findOne({
-        where: { idFilm: idFilm, userId: id },
+        where: { idFilm: idFilm, userId: userId },
       });
-      return { error: false, data: response };
+      if (response) {
+        return { error: false, data: { estado: true, info: response } };
+      } else if (!response) {
+        return { error: false, data: { estado: false, info: "nada" } };
+      }
     } catch (error) {
       console.error(error);
       return { error: true, data: error };

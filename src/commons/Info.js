@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
+import Button from "./Button";
 
 function Info() {
   const [film, setFilm] = useState({});
   const params = useParams();
-  const id = params.id;
+  const idFilm = params.id;
   const type = params.type;
+  let existe = false;
+  const [inFav, setInFav] = useState(false);
 
   useEffect(() => {
     axios
@@ -14,7 +17,7 @@ function Info() {
         "https://api.themoviedb.org/3/" +
           type +
           "/" +
-          id +
+          idFilm +
           "?api_key=e8ff6e05340d323b4edab8db8b289155&language=es"
       )
       .then((res) => res.data)
@@ -24,6 +27,19 @@ function Info() {
       .catch(() =>
         console.error("No se pudo acceder a las películas más populares")
       );
+  }, []);
+
+  useEffect(() => {
+    setInFav(false);
+    let getFavs = async () => {
+      let res = await axios.get("/api/fav/misfavs");
+      let data = await res.data.map(function (e) {
+        let idPeli = e.idFilm;
+        if (idPeli === idFilm) setInFav(true);
+      });
+    };
+
+    getFavs();
   }, []);
 
   let titulo;
@@ -41,7 +57,7 @@ function Info() {
   const handleAdd = () => {
     axios
       .post("/api/fav/add", {
-        id: id,
+        id: idFilm,
         type: type,
         title: title,
         poster_path: poster_path,
@@ -65,11 +81,15 @@ function Info() {
           <p>Sinopsis: {film.overview}</p>
           <p>Título original: {titOriginal}</p>
           <p>Valoración del público: {Math.round(film.vote_average)}</p>
-          {
-            <button className="button is-danger is-rounded" onClick={handleAdd}>
-              Agregar a Favoritos
-            </button>
-          }
+
+          <Button
+            inFav={inFav}
+            setInFav={setInFav}
+            type={type}
+            title={title}
+            poster_path={poster_path}
+            idFilm={idFilm}
+          />
         </div>
       </div>
     </div>

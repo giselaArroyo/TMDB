@@ -25,9 +25,9 @@ const Bienvenido = () => {
           <div className="is-flex is-justify-content-center">
             <button
               className="button is-info is-rounded"
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/login")}
             >
-              Ir al home
+              Ingresar
             </button>
           </div>
         </div>
