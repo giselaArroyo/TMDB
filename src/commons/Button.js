@@ -10,8 +10,6 @@ function Button({ inFav, type, title, poster_path, idFilm, setInFav }) {
       .catch((err) => console.error(err));
   };
 
-  // console.log(typeof idFilm);
-
   const handleAdd = () => {
     axios
       .post("/api/fav/add", {

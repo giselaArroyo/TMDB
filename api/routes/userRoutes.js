@@ -20,8 +20,4 @@ router.get("/validate", validateAuth, userController.validate);
 //VER MI PERFIL   ---> api/user/perfil
 router.get("/perfil", validateAuth, userController.perfil);
 
-//olvidaste tu contraseña
-
-//cambiar contraseña
-
 module.exports = router;
