@@ -4,11 +4,9 @@ function Card({ data }) {
   let titulo, poster;
   poster = data.poster_path;
 
-  if (data.media_type === "tv") {
+  if (data.name) {
     titulo = data.name;
-  } else if (data.media_type === "movie") {
-    titulo = data.title;
-  } else {
+  } else if (data.title) {
     titulo = data.title;
   }
 
